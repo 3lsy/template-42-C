@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-LIB='git@github.com:andreiglesias/libft.git'
+LIB='git@github.com:3lsy/libft.git'
 HEADERS=./include
 SRC=./src
 
