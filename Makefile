@@ -6,7 +6,7 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/25 11:47:33 by echavez-          #+#    #+#              #
-#    Updated: 2023/02/25 11:47:47 by echavez-         ###   ########.fr        #
+#    Updated: 2023/06/22 20:23:02 by echavez-         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -88,39 +88,39 @@ E0M         =   "\e[0m"
 
 #******************************* DEPS COMPILATION ********************************#
 
-%.o             :   $(foreach dir,$(DIRS),../$(dir)/%.c)
-                    @printf $(GREEN)"Generating "$(NAME)" objects... %-33.33s\r"$(E0M) $@
-                    @$(CC) $(CFLAGS) $(INCLUDE) -MMD -o $@ -c $<
+%.o             :       $(foreach dir,$(DIRS),../$(dir)/%.c)
+	                @printf $(GREEN)"Generating "$(NAME)" objects... %-33.33s\r"$(E0M) $@
+	                @$(CC) $(CFLAGS) $(INCLUDE) -MMD -o $@ -c $<
 
 #******************************* MAIN COMPILATION ********************************#
 
-$(NAME)         :   ftlib $(OBJS)
-                    @$(CC) $(INCLUDE) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB_INC)
-                    @$(ECHO) $(BOLD)$(GREEN)'> '$(NAME)' Compiled'$(E0M)
+$(NAME)         :       ftlib $(OBJS)
+	                @$(CC) $(INCLUDE) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB_INC)
+	                @$(ECHO) $(BOLD)$(GREEN)'> '$(NAME)' Compiled'$(E0M)
 
 clean           :
-                    @($(RM) $(OBJS))
-                    @($(RM) $(DEPS))
-                    @($(RM) $(DIROBJ))
-                    @(cd $(LIB) && $(MAKE) clean)
-                    @$(ECHO) $(BOLD)$(RED)'> '$(NAME)' directory        cleaned'$(E0M)
+	                @($(RM) $(OBJS))
+	                @($(RM) $(DEPS))
+	                @($(RM) $(DIROBJ))
+	                @(cd $(LIB) && $(MAKE) clean)
+	                @$(ECHO) $(BOLD)$(RED)'> '$(NAME)' directory        cleaned'$(E0M)
 
-all             :  $(NAME)
+all             :       $(NAME)
 
-fclean          :  clean
-                    @$(RM) $(NAME)
-                    @(cd $(LIB) && $(MAKE) fclean)
-                    @$(ECHO) $(BOLD)$(RED)'> Executable             removed'$(E0M)
+fclean          :       clean
+	                @$(RM) $(NAME)
+	                @(cd $(LIB) && $(MAKE) fclean)
+	                @$(ECHO) $(BOLD)$(RED)'> Executable             removed'$(E0M)
 
-re              :  fclean all
+re              :       fclean all
 
 ftlib           :
-                    @(cd $(LIB) && $(MAKE))
+	                @(cd $(LIB) && $(MAKE))
 
 init            :
-                    @$(GIT) submodule init
-                    @$(GIT) submodule update
+	                @$(GIT) submodule init
+	                @$(GIT) submodule update
 
-.PHONY          :  all clean re fclean ftlib
+.PHONY          :       all clean re fclean ftlib
 
 -include $(DEPS)
